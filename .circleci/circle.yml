@@ -1,24 +1,21 @@
-# Javascript Node CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-javascript/ for more details
-#
+defaults: &defaults
+  working_directory: ~/app
+  docker:
+    - image: cypress/base:10
+
 version: 2
 jobs:
   one:
-    docker:
-      - image: cypress/base:10
     steps:
       - checkout
       - run: echo "hello world"
   two:
-    docker:
-      - image: cypress/base:10
     steps:
       - checkout
       - run: echo "hello world1"
 
-workflow:
-  build:
+workflows:
+  test:
     jobs:
       - one
       - two
