@@ -44,7 +44,7 @@ describe('Navigate to WorlRoamer site and Sign Up WorlRoamer site', () => {
     cy.get('@SignUpBtn').click({force: true})
   })
 
-  it.only('Verify that the error message display when singup with empty value', () => {
+  it('Verify that the error message display when singup with empty value', () => {
     cy.get('input[name=username]').clear()
     cy.get('input[name=password]').clear()
     cy.get('span').contains('Create account').as('CreateAccountBtn')

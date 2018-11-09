@@ -4,11 +4,22 @@
 #
 version: 2
 jobs:
-  build:
+  one:
     docker:
-      # specify the version you desire here
       - image: circleci/node:4.8.2
-      
     steps:
       - checkout
       - run: echo "hello world"
+  two:
+    docker:
+      - image: circleci/node:4.8.2
+    steps:
+      - checkout
+      - run: echo "hello world1"
+
+workflow:
+  build:
+    jobs:
+      - one
+      - two      
+
