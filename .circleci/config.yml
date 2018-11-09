@@ -2,12 +2,14 @@ version: 2
 jobs:
   one:
     docker:
-      - image: circleci/node:4.8.2-jessie
+      - image: circleci/node:4.8.2
     steps:
       - checkout
       - run: 
         command: echo "hello world"
   two:
+    docker:
+      - image: circleci/node:4.8.2
     steps:
       - checkout
       - run:
