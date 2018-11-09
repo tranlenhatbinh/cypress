@@ -6,7 +6,7 @@ version: 2
 jobs:
   one:
     docker:
-       - image: cypress/base:10
+       - image: bash@sha256:9f0a4aa3c9931bd5fdda51b1b2b74a0398a8eabeaf9519d807e010b9d9d41993
     steps:
       - checkout
       - run: echo "hello world"
