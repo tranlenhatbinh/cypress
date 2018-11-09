@@ -1,6 +1,10 @@
 version: 2.1
 jobs:
   one:
+    browser: chrome
+    record: true
+    parallel: true
+    parallelism: 2
     docker:
       - image: circleci/node:4.8.2
     steps:
