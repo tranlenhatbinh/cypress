@@ -6,13 +6,13 @@ version: 2
 jobs:
   one:
     docker:
-      - image: circleci/node:4.8.2
+      - image: cypress/base
     steps:
       - checkout
       - run: echo "hello world"
   two:
     docker:
-      - image: circleci/node:4.8.2
+      - image: cypress/base
     steps:
       - checkout
       - run: echo "hello world1"
@@ -21,5 +21,5 @@ workflow:
   build:
     jobs:
       - one
-      - two      
+      - two
 
