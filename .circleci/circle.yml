@@ -2,17 +2,17 @@
 #
 # Check https://circleci.com/docs/2.0/language-javascript/ for more details
 #
-version: 2
+version: 3.1.1
 jobs:
   one:
     docker:
-      - image: cypress/base:10
+      - image: cypress/base:8
     steps:
       - checkout
       - run: echo "hello world"
   two:
     docker:
-      - image: cypress/base:10
+      - image: cypress/base:8
     steps:
       - checkout
       - run: echo "hello world1"
