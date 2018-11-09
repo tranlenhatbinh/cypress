@@ -1,13 +1,12 @@
 version: 2.1
 jobs:
   one:
-    parallelism: 2
     docker:
       - image: circleci/node:4.8.2
     steps:
       - checkout
       - run: 
-          command: yarn run cypress record
+          command: echo "hello world"
   two:
     docker:
       - image: circleci/node:4.8.2
