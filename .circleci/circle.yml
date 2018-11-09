@@ -13,3 +13,5 @@ workflows:
   build:
     jobs:
       - test
+        parallel: true
+        parallelism: 2
