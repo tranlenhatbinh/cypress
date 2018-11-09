@@ -7,14 +7,14 @@ jobs:
     steps:
       - checkout
       - run: 
-        command: yarn run cypress record
+          command: yarn run cypress record
   two:
     docker:
       - image: circleci/node:4.8.2
     steps:
       - checkout
       - run:
-        command: echo "hello world1"
+          command: echo "hello world1"
 
 workflows:
   test:
