@@ -6,7 +6,7 @@ version: 2
 jobs:
   one:
     docker:
-      - image: circleci/node:4.8.2
+       - image: cypress/base:10
     steps:
       - checkout
       - run: echo "hello world"
