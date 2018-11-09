@@ -5,8 +5,20 @@ jobs:
       - image: circleci/node:4.8.2
     steps:
       - checkout
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package.json" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+
+      - run: yarn install
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
       - run: 
-          command: echo "hello world"
+          command: yarn run cypress record
   two:
     docker:
       - image: circleci/node:4.8.2
@@ -20,4 +32,3 @@ workflows:
     jobs:
       - one
       - two
-
