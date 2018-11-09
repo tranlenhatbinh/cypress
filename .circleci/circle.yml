@@ -6,13 +6,13 @@ version: 2
 jobs:
   one:
     docker:
-      - image: cypress/base
+      - image: cypress/base:10
     steps:
       - checkout
       - run: echo "hello world"
   two:
     docker:
-      - image: cypress/base
+      - image: cypress/base:10
     steps:
       - checkout
       - run: echo "hello world1"
