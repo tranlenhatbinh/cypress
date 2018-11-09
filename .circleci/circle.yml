@@ -1,18 +1,17 @@
-defaults: &defaults
-  working_directory: ~/app
-  docker:
-    - image: cypress/base:10
-
 version: 2
 jobs:
   one:
+    docker:
+      - image: circleci/node:4.8.2-jessie
     steps:
       - checkout
-      - run: echo "hello world"
+      - run: 
+        command: echo "hello world"
   two:
     steps:
       - checkout
-      - run: echo "hello world1"
+      - run:
+        command: echo "hello world1"
 
 workflows:
   test:
