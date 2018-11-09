@@ -10,7 +10,7 @@ jobs:
     steps:
       - checkout
       - run: 
-        command: echo "hello world"
+        command: npm run cypress record
   two:
     docker:
       - image: circleci/node:4.8.2
