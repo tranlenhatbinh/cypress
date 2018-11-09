@@ -14,7 +14,7 @@
     "eject": "react-scripts eject",
     "cypress open": "cypress open",
     "cypress run": "cypress run",
-    "cypress record": "cypress run --record"
+    "cypress record": "cypress run --record --parallel"
   },
   "eslintConfig": {
     "extends": "react-app"
