@@ -6,7 +6,7 @@ jobs:
     steps:
       - checkout
       - run: yarn install
-      - run: yarn test
+      - run: yarn cypress open
   two:
     docker:
       - image: circleci/node:4.8.2
