@@ -3,7 +3,7 @@ jobs:
   one:
     docker:
       - image: cypress/base:8
-    parallelism: 2
+    
     steps:
       - checkout
       - restore_cache:
@@ -27,10 +27,13 @@ jobs:
     steps:
       - checkout
       - run:
-          command: echo "hello world1"
+          command: echo "Test circleci"
 
 workflows:
   test:
     jobs:
       - one
+        parallelism: 2
+        parallel: true
+        group: '1st-machine'
       - two
