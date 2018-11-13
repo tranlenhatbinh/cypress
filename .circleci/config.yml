@@ -4,8 +4,8 @@ jobs:
     docker:
       - image: cypress/base:8
     parallelism: 2
-      parallel: true
-      group: '1st-machine'
+    parallel: 'true'
+    group: '1st-machine'
     steps:
       - checkout
       - restore_cache:
@@ -22,7 +22,7 @@ jobs:
           paths:
             - ~/.npm
             - ~/.cache
-      - run: $(npm bin)/cypress run --record -- --parallel --group 1st-machine --spec 'cypress/integration/authen/' --browser chrome
+      - run: $(npm bin)/cypress run --record -- --parallel --group 1st-machine --spec 'cypress/integration/authen/'
   two:
     docker:
       - image: cypress/base:8
