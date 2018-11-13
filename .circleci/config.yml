@@ -20,7 +20,7 @@ jobs:
           paths:
             - ~/.npm
             - ~/.cache
-      - run: $(npm bin)/cypress run --record -- --parallel --group 1st-machine
+      - run: $(npm bin)/cypress run --record --key fe2fc7a2-fff0-4309-83bf-b1bad500cfa4 --parallel --group 1st-machine
   two:
     docker:
       - image: cypress/base:8
