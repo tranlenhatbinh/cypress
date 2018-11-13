@@ -20,7 +20,7 @@ jobs:
           paths:
             - ~/.npm
             - ~/.cache
-      - run: $(npm bin)/cypress run --record -- --parallel
+      - run: $(npm bin)/cypress run --record -- --parallel --group machine --spec 'cypress/integration/authen/*'
   two:
     docker:
       - image: cypress/base:8

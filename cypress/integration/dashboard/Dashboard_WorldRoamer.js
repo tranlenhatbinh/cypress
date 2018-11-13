@@ -208,7 +208,6 @@ describe('Find Rooms page', () => {
     cy.get('a > p').contains('See All').click()
     // Assertion:
     cy.wait(1000)
-    cy.get('ul').find('a').contains('Travel Inspiration').should('have.class', 'active')
     cy.get('h4').should('contain', 'Culture & Heritage')
     cy.get('h4').should('contain', 'Food & Drink')
     cy.get('h4').should('contain', 'Lifestyle')
