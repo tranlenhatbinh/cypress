@@ -4,9 +4,7 @@ jobs:
     docker:
       - image: cypress/base:8
     parallelism: 2
-    record: true # record results to Cypress Dashboard
-    parallel: true # run tests in parallel
-    group: 2 machines
+    parallel: true
     steps:
       - checkout
       - restore_cache:
@@ -23,7 +21,7 @@ jobs:
           paths:
             - ~/.npm
             - ~/.cache
-      - run: $(npm bin)/cypress run --record --key fe2fc7a2-fff0-4309-83bf-b1bad500cfa4 --group 2 machines --parallel
+      - run: $(npm bin)/cypress run --record --key fe2fc7a2-fff0-4309-83bf-b1bad500cfa4 --parallel --group 2 machines
   two:
     docker:
       - image: circleci/node:4.8.2
