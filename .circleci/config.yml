@@ -35,6 +35,6 @@ workflows:
   test:
     jobs:
       - one
-        browser: chrome
+        browser: 'chrome'
         group: '1st-machine'
       - two
