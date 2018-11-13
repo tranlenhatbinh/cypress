@@ -20,7 +20,7 @@ jobs:
           paths:
             - ~/.npm
             - ~/.cache
-      - run: $(npm bin)/cypress run --record --group 2x-chrome --parallel --browser chrome
+      - run: $(npm bin)/cypress run --record --group 2x-chrome --parallel
   two:
     docker:
       - image: circleci/node:4.8.2
