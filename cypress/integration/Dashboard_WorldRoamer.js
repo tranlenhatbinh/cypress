@@ -168,6 +168,5 @@ describe('Find Rooms page', () => {
     cy.get('p').should('contain', 'Twin Bed')
     cy.get('p').should('contain', 'Double Bed')
     cy.get('p').should('contain', 'Meeting Facilities')
-
   })
 })

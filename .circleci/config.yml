@@ -1,12 +1,26 @@
 version: 2.1
+orbs:
+  cypress: cypress-io/cypress@1.0.0
 jobs:
   one:
     docker:
-      - image: circleci/node:8.11.4
+      - image: cypress/base:8
     steps:
       - checkout
-      - run: yarn install
-      - run: yarn run cypress open
+      - restore_cache:
+          keys:
+            - v1-deps-{{ .Branch }}-{{ checksum "package.json" }}
+            - v1-deps-{{ .Branch }}
+            - v1-deps
+      - run:
+          name: Install Dependencies
+          command: npm ci
+      - save_cache:
+          key: v1-deps-{{ .Branch }}-{{ checksum "package.json" }}
+          paths:
+            - ~/.npm
+            - ~/.cache
+      - run: $(npm bin)/cypress run --record --key fe2fc7a2-fff0-4309-83bf-b1bad500cfa4
   two:
     docker:
       - image: circleci/node:4.8.2
