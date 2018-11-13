@@ -1,9 +1,12 @@
 version: 2.1
+orbs:
+  cypress: cypress-io/cypress@1.0.0
 jobs:
   one:
     docker:
       - image: cypress/base:8
     parallelism: 2
+    browser: chrome
     steps:
       - checkout
       - restore_cache:
@@ -20,31 +23,10 @@ jobs:
           paths:
             - ~/.npm
             - ~/.cache
-      - run: $(npm bin)/cypress run --record -- --parallel --group 1st-machine --spec 'cypress/integration/authen/' --headed --browser chrome
+      - run: $(npm bin)/cypress run --record -- --parallel --group 1st-machine --spec 'cypress/integration/authen/' --browser chrome
   two:
     docker:
       - image: cypress/base:8
-    parallelism: 2
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - v1-deps-{{ .Branch }}-{{ checksum "package.json" }}
-            - v1-deps-{{ .Branch }}
-            - v1-deps
-      - run:
-          name: Install Dependencies
-          command: npm install
-                   npm ci
-      - save_cache:
-          key: v1-deps-{{ .Branch }}-{{ checksum "package.json" }}
-          paths:
-            - ~/.npm
-            - ~/.cache
-      - run: $(npm bin)/cypress run --record -- --parallel --group 1st-machine --spec 'cypress/integration/dashboard/' --headed --browser chrome
-  three:
-    docker:
-      - image: circleci/node:4.8.2
     steps:
       - checkout
       - run:
@@ -55,4 +37,3 @@ workflows:
     jobs:
       - one
       - two
-      - three
