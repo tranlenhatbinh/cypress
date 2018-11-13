@@ -175,7 +175,7 @@ describe('Find Rooms page', () => {
 
     // Sign in after clicking on favorite icon
     cy.wait(1000)
-    cy.get('@ResultTitle').parent().siblings().children().find('div > div > div > button').eq(0).click()
+    cy.get('@ResultTitle').parent().siblings().children().find('button').eq(0).click()
     cy.readFile('cypress/fixtures/users/user.json').as('userData').then((userData) => {
       cy.get('input[name=email]').clear().type(userData.userEmail)
       cy.get('input[name=password]').clear().type(userData.userPassword)
@@ -183,7 +183,7 @@ describe('Find Rooms page', () => {
       cy.get('@SignInBtn').click({force: true})
     })
     cy.wait(1000)
-    cy.get('@ResultTitle').parent().siblings().children().find('div > div > div > button').eq(0).click()
+    cy.get('@ResultTitle').parent().siblings().children().find('button').eq(0).click()
     // Assertion:
     cy.get('div').should('contain', 'saved to your Saved Items!')
 
@@ -198,5 +198,25 @@ describe('Find Rooms page', () => {
     cy.get('h4').should('contain', 'EXPLORE IDEAS')
 
     cy.get('.country-select__value-container').click()
+    cy.get('.country-select__option').contains('Danang, Vietnam').click()
+    cy.wait(1000)
+    cy.get('figure').should('be.above', '0')
+
+    // clean test case:
+    cy.get('.country-select__value-container').click()
+    cy.get('.country-select__option').contains('All Destinations').click()
+    cy.get('a > p').contains('See All').click()
+    // Assertion:
+    cy.wait(1000)
+    cy.get('ul').find('a').contains('Travel Inspiration').should('have.class', 'active')
+    cy.get('h4').should('contain', 'Culture & Heritage')
+    cy.get('h4').should('contain', 'Food & Drink')
+    cy.get('h4').should('contain', 'Lifestyle')
+    cy.get('h4').should('contain', 'Nature')
+    cy.get('h4').should('contain', 'Night Life')
+    cy.get('h4').should('contain', 'Places of Interest')
+    cy.get('h4').should('contain', 'General')
+    cy.get('h4').should('contain', 'Featured Articles')
+    cy.get('h4').should('contain', 'Recent Articles')
   })
 })
