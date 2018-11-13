@@ -3,7 +3,9 @@ jobs:
   one:
     docker:
       - image: cypress/base:8
-    
+    parallelism: 2
+    parallel: true
+    group: '1st-machine'
     steps:
       - checkout
       - restore_cache:
@@ -33,7 +35,4 @@ workflows:
   test:
     jobs:
       - one
-        parallelism: 2
-        parallel: true
-        group: '1st-machine'
       - two
