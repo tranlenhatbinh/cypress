@@ -20,7 +20,7 @@ jobs:
           paths:
             - ~/.npm
             - ~/.cache
-      - run: $(npm bin)/cypress run --record -- --parallel --group 1st-machine --spec 'cypress/integration/authen/' --headed
+      - run: $(npm bin)/cypress run --record -- --parallel --group 1st-machine --spec 'cypress/integration/authen/' --headed --browser chrome
   two:
     docker:
       - image: cypress/base:8
@@ -41,7 +41,7 @@ jobs:
           paths:
             - ~/.npm
             - ~/.cache
-      - run: $(npm bin)/cypress run --record -- --parallel --group 1st-machine --spec 'cypress/integration/dashboard/' --headed
+      - run: $(npm bin)/cypress run --record -- --parallel --group 1st-machine --spec 'cypress/integration/dashboard/' --headed --browser chrome
   three:
     docker:
       - image: circleci/node:4.8.2
