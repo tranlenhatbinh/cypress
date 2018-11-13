@@ -35,7 +35,4 @@ workflows:
   test:
     jobs:
       - one
-        executor: 'cypress/browsers-chrome70'
-        browser: 'chrome'
-        group: '1st-machine'
       - two
