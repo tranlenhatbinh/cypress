@@ -20,7 +20,8 @@ jobs:
           paths:
             - ~/.npm
             - ~/.cache
-      - run: $(npm bin)/cypress run --record --key fe2fc7a2-fff0-4309-83bf-b1bad500cfa4 --parallel --group 2 machines
+      - run: $(npm bin)/cypress run --record --key fe2fc7a2-fff0-4309-83bf-b1bad500cfa4 --parallel --group 1st-machine -spec 'cypress/integration/authen/'
+             $(npm bin)/cypress run --record --key fe2fc7a2-fff0-4309-83bf-b1bad500cfa4 --parallel --group 2nd-machine -spec 'cypress/integration/dashboard/'
   two:
     docker:
       - image: circleci/node:4.8.2
