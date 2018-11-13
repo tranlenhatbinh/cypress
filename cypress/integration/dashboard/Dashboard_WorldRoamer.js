@@ -5,7 +5,7 @@ before(() => {
 
 describe('Menu of Dashboard', () => {
   it('Verify the "Find Rooms" is active when navigating to WorldRoamer page', () => {
-    cy.get('ul').find('a').contains('Find Rooms')
+    cy.get('ul').find('a').contains('Find Rooms').should('have.class', 'active')
   })
 
   it('Verify the other menus is active when clicking on them', () => {
@@ -17,7 +17,7 @@ describe('Menu of Dashboard', () => {
 
   it('Verify the "USD" is default value when navigating to WorldRoamer page and its value change when selecting another value', () => {
     cy.get('#currency').should('have.value', 'USD').as('Currency')
-    cy.get('@Currency').parent('div').click({force: true})
+    cy.get('@Currency').parent().click({force: true})
     cy.get('.dropdown-list li').contains('IDR').click()
     //Assertion: The selected value is displayed
     cy.get('#currency').should('have.value', 'IDR')
@@ -121,7 +121,7 @@ describe('Find Rooms page', () => {
       .and('have.value', '')
   })
 
-  it.only('Verify that the result display when searching', () => {
+  it('Verify that the result display when searching', () => {
     cy.get('#enter-destination').clear().type('Singapore')
     cy.wait(2000)
     cy.get('span').contains('Search').click({force: true})
@@ -162,11 +162,41 @@ describe('Find Rooms page', () => {
     cy.get('#meeting_facilities').click({force: true})
 
     // Assertion:
+    cy.wait(1000)
     cy.get('span').should('contain', 'Clear All Filter')
     cy.get('p').should('contain', 'Free Cancellation')
     cy.get('p').should('contain', 'Hotels')
     cy.get('p').should('contain', 'Twin Bed')
     cy.get('p').should('contain', 'Double Bed')
     cy.get('p').should('contain', 'Meeting Facilities')
+
+    // Clean filter:
+    cy.get('span').contains('Clear All Filter').click({force: true})
+
+    // Sign in after clicking on favorite icon
+    cy.wait(1000)
+    cy.get('@ResultTitle').parent().siblings().children().find('div > div > div > button').eq(0).click()
+    cy.readFile('cypress/fixtures/users/user.json').as('userData').then((userData) => {
+      cy.get('input[name=email]').clear().type(userData.userEmail)
+      cy.get('input[name=password]').clear().type(userData.userPassword)
+      cy.get('span').contains('Sign in').as('SignInBtn')
+      cy.get('@SignInBtn').click({force: true})
+    })
+    cy.wait(1000)
+    cy.get('@ResultTitle').parent().siblings().children().find('div > div > div > button').eq(0).click()
+    // Assertion:
+    cy.get('div').should('contain', 'saved to your Saved Items!')
+
+    // clean test
+    cy.get('ul').find('a').contains('Find Rooms').click({force: true})
+    // Assertion: Stay up to date section displays
+    cy.get('h4').should('contain', 'STAY UP-TO-DATE')
+    cy.get('span').contains('Joy sent to your inbox').click({force:true})
+    cy.get('input[name=subscription-email]').siblings().should('contain', 'Please enter your email address')
+
+    cy.get('h4').should('contain','WHAT WE OFFER')
+    cy.get('h4').should('contain', 'EXPLORE IDEAS')
+
+    cy.get('.country-select__value-container').click()
   })
 })
