@@ -6,7 +6,6 @@ jobs:
     docker:
       - image: cypress/base:8
     parallelism: 2
-    browser: chrome
     steps:
       - checkout
       - restore_cache:
@@ -36,4 +35,6 @@ workflows:
   test:
     jobs:
       - one
+        browser: chrome
+        group: '1st-machine'
       - two
