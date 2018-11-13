@@ -21,8 +21,28 @@ jobs:
             - ~/.npm
             - ~/.cache
       - run: $(npm bin)/cypress run --record --key fe2fc7a2-fff0-4309-83bf-b1bad500cfa4 --parallel --group 1st-machine -spec 'cypress/integration/authen/'
-             $(npm bin)/cypress run --record --key fe2fc7a2-fff0-4309-83bf-b1bad500cfa4 --parallel --group 2nd-machine -spec 'cypress/integration/dashboard/'
   two:
+    docker:
+      - image: cypress/base:8
+    parallelism: 2
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-deps-{{ .Branch }}-{{ checksum "package.json" }}
+            - v1-deps-{{ .Branch }}
+            - v1-deps
+      - run:
+          name: Install Dependencies
+          command: npm install
+                   npm ci
+      - save_cache:
+          key: v1-deps-{{ .Branch }}-{{ checksum "package.json" }}
+          paths:
+            - ~/.npm
+            - ~/.cache
+      - run: $(npm bin)/cypress run --record --key fe2fc7a2-fff0-4309-83bf-b1bad500cfa4 --parallel --group 1st-machine -spec 'cypress/integration/dashboard/'
+  three:
     docker:
       - image: circleci/node:4.8.2
     steps:
@@ -35,3 +55,4 @@ workflows:
     jobs:
       - one
       - two
+      - three
