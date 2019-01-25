@@ -181,7 +181,7 @@ describe('Navigate to WorlRoamer site and Trip plan page', () => {
     cy.Logout();
   });
 
-  it('Verify that user can create a trip with saved links', () => {
+  it.only('Verify that user can create a trip with saved links', () => {
     // cy.get('span', {timeout:15000}).should('contain', 'OK')
     // cy.get('span')
     //   .contains('OK')
