@@ -1,0 +1,36 @@
+version: 2.1
+jobs:
+  one:
+    docker:
+      - image: cypress/browsers:chrome69
+    parallelism: 2
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-deps-{{ .Branch }}-{{ checksum "package.json" }}
+            - v1-deps-{{ .Branch }}
+            - v1-deps
+      - run:
+          name: Install Dependencies
+          command: npm install
+                   npm ci
+      - save_cache:
+          key: v1-deps-{{ .Branch }}-{{ checksum "package.json" }}
+          paths:
+            - ~/.npm
+            - ~/.cache
+      - run: $(npm bin)/cypress run --record --key 9afcec02-8e20-48e8-81f5-4d7ba5d8efe8 --parallel
+  two:
+    docker:
+      - image: cypress/browsers:chrome69
+    steps:
+      - checkout
+      - run:
+          command: echo "Test circleci"
+
+workflows:
+  test:
+    jobs:
+      - one
+      - two

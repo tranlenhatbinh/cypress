@@ -1,11 +1,6 @@
 {
+  "projectId": "gjds8m",
   "baseUrl": "https://dev.worldroamer.com/",
-  "viewportHeight": 600,
-  "viewportWidth": 1000,
-  "projectId": "cbg4xi",
-  "reporter": "junit",
-  "reporterOptions": {
-    "mochaFile": "results/my-test-output.xml",
-    "toConsole": true
-  }
+  "viewportHeight": 700,
+  "viewportWidth": 1300
 }
