@@ -24,9 +24,9 @@
 // -- This is will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
-import { register } from 'cypress-match-screenshot';
-register('myCustomName');
-register();
+// import { register } from 'cypress-match-screenshot';
+// register('myCustomName');
+// register();
 
 Cypress.Commands.add('NavigateWorldRoamer', () => {
   cy.visit('/');
