@@ -1,36 +1,40 @@
 version: 2.1
 jobs:
-  one:
+  # one:
+  #   docker:
+  #     - image: cypress/browsers:chrome69
+  #   parallelism: 2
+  #   steps:
+  #     - checkout
+  #     - restore_cache:
+  #         keys:
+  #           - v1-deps-{{ .Branch }}-{{ checksum "package.json" }}
+  #           - v1-deps-{{ .Branch }}
+  #           - v1-deps
+  #     - run:
+  #         name: Install Dependencies
+  #         command: npm install
+  #                  npm ci
+  #     - save_cache:
+  #         key: v1-deps-{{ .Branch }}-{{ checksum "package.json" }}
+  #         KNAPSACK_PRO_TEST_SUITE_TOKEN_CYPRESS: "6eb6d3a258834abccba27177b1e96a33"
+  #         paths:
+  #           - ~/.npm
+  #           - ~/.cache
+  #     - run: $(npm bin)/cypress run --record -- --parallel --browser chrome
+  two:
     docker:
       - image: cypress/browsers:chrome69
     parallelism: 2
     steps:
       - checkout
-      - restore_cache:
-          keys:
-            - v1-deps-{{ .Branch }}-{{ checksum "package.json" }}
-            - v1-deps-{{ .Branch }}
-            - v1-deps
       - run:
-          name: Install Dependencies
-          command: npm install
-                   npm ci
-      - save_cache:
-          key: v1-deps-{{ .Branch }}-{{ checksum "package.json" }}
-          paths:
-            - ~/.npm
-            - ~/.cache
-      - run: $(npm bin)/cypress run --record -- --parallel --browser chrome
-  two:
-    docker:
-      - image: cypress/browsers:chrome69
-    steps:
-      - checkout
-      - run:
-          command: echo "Test circleci"
+          name: Run Cypress.io tests with @knapsack-pro/cypress using Knapsack Pro Queue Mode
+          command: $(npm bin)/knapsack-pro-cypress
+          environment: "KNAPSACK_PRO_TEST_SUITE_TOKEN_CYPRESS": "6eb6d3a258834abccba27177b1e96a33"
 
 workflows:
   test:
     jobs:
-      - one
+      # - one
       - two

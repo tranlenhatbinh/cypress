@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/tranlenhatbinh/cypress#readme",
   "devDependencies": {
+    "@knapsack-pro/cypress": "^1.0.1",
     "cypress": "^3.1.4"
   }
 }
