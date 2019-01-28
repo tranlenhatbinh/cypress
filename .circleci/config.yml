@@ -30,7 +30,8 @@ jobs:
       - checkout
       - run:
           name: Run Cypress.io tests with @knapsack-pro/cypress using Knapsack Pro Queue Mode
-          command: $(npm bin)/knapsack-pro-cypress
+          command: $(npm bin)/ npm install
+                   $(npm bin)/knapsack-pro-cypress
           environment: {"KNAPSACK_PRO_TEST_SUITE_TOKEN_CYPRESS": "6eb6d3a258834abccba27177b1e96a33"}
 
 workflows:
